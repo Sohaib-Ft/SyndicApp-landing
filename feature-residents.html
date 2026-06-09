@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Résidents — SyndicPro</title>
+  <meta name="description" content="Gérez vos résidents, leurs informations et leur historique complet depuis le module résidents SyndicPro." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F9FC;
+      --bg-card: #FFFFFF;
+      --primary: #1E3A5F;
+      --accent: #3B82F6;
+      --accent-dark: #2563EB;
+      --text: #4A5568;
+      --heading: #1E3A5F;
+      --border: #E2E8F0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 64px; display: flex; align-items: center; }
+    .topbar-inner { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--heading); padding: 8px 16px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--bg-card); transition: all 0.2s ease; }
+    .back-btn:hover { background: var(--heading); color: #fff; border-color: var(--heading); transform: translateX(-2px); }
+    .back-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+    .topbar-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: var(--heading); }
+    .topbar-logo-icon { width: 36px; height: 36px; border-radius: 9px; overflow: hidden; flex-shrink: 0; }
+    .topbar-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .topbar-cta { display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; background: linear-gradient(135deg, #FDC536, #F9A01B, #E87A16); color: #fff; transition: all 0.3s ease; box-shadow: 0 4px 14px rgba(249,115,22,0.3); }
+    .topbar-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
+    .btn-icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+    .page-hero { padding: 120px 24px 60px; background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 60%, #1D4ED8 100%); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.06) 0%, transparent 60%); pointer-events: none; }
+    .hero-inner { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+    .feature-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; margin-bottom: 20px; }
+    .feature-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #93C5FD; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .page-hero h1 { font-size: clamp(36px, 5vw, 58px); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 18px; letter-spacing: -1px; }
+    .page-hero h1 span { color: #FDC536; }
+    .page-hero p { font-size: 18px; color: rgba(255,255,255,0.85); max-width: 620px; margin-bottom: 32px; line-height: 1.7; }
+    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .btn-hero-gold { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; background: linear-gradient(135deg, #FDC536, #F9A01B, #E87A16); color: #fff; border: none; box-shadow: 0 8px 24px rgba(249,115,22,0.35); transition: all 0.3s ease; }
+    .btn-hero-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.45); }
+    .btn-hero-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4); color: #fff; transition: all 0.3s ease; }
+    .btn-hero-ghost:hover { background: rgba(255,255,255,0.25); }
+
+    .quick-stats { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 28px 24px; }
+    .quick-stats-inner { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; }
+    .qstat { flex: 1; min-width: 160px; text-align: center; padding: 16px 24px; border-right: 1px solid var(--border); }
+    .qstat:last-child { border-right: none; }
+    .qstat-num { font-size: 28px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+    .qstat-label { font-size: 13px; color: var(--text); font-weight: 500; }
+
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section-label { display: inline-block; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+    .section-title { font-size: clamp(26px, 4vw, 38px); font-weight: 800; color: var(--heading); line-height: 1.2; margin-bottom: 14px; }
+    .section-sub { font-size: 16px; color: var(--text); max-width: 560px; line-height: 1.7; }
+
+    /* RESIDENT CARDS DEMO */
+    .resident-demo { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+    .resident-demo-header { background: #F1F5F9; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .resident-demo-title { font-size: 14px; font-weight: 700; color: var(--heading); }
+    .res-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .res-badge.active { background: rgba(59,130,246,0.1); color: #2563EB; }
+    .resident-row { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--bg-card); transition: background 0.15s; }
+    .resident-row:last-child { border-bottom: none; }
+    .resident-row:hover { background: #F8FAFF; }
+    .res-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .res-info { flex: 1; }
+    .res-name { font-size: 14px; font-weight: 700; color: var(--heading); }
+    .res-apt { font-size: 12px; color: var(--text); }
+    .res-amount { font-size: 13px; font-weight: 700; }
+    .res-status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .res-status.paid { background: rgba(16,185,129,0.1); color: #059669; }
+    .res-status.pending { background: rgba(249,160,27,0.1); color: #D97706; }
+    .res-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .feat-block { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .feat-block.reverse { direction: rtl; }
+    .feat-block.reverse > * { direction: ltr; }
+    .feat-text h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 800; color: var(--heading); margin-bottom: 14px; }
+    .feat-text p { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 24px; }
+    .feat-checklist { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .feat-check { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--heading); font-weight: 500; }
+    .feat-check-icon { width: 22px; height: 22px; border-radius: 50%; background: rgba(59,130,246,0.1); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .feat-check-icon svg { width: 12px; height: 12px; stroke: var(--accent); fill: none; stroke-width: 3; }
+    .feat-img-wrap { border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.12); border: 1px solid var(--border); position: relative; }
+    .feat-img-wrap img { width: 100%; height: auto; display: block; }
+    .img-label { position: absolute; bottom: 16px; left: 16px; background: rgba(15,23,42,0.85); backdrop-filter: blur(8px); color: #fff; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 999px; }
+
+    /* FLOW SECTION */
+    .flow-section { background: var(--primary); padding: 80px 0; }
+    .flow-header { text-align: center; margin-bottom: 56px; }
+    .flow-header .section-label { color: #93C5FD; }
+    .flow-header .section-title { color: #fff; }
+    .flow-header .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto; }
+    .flow-steps { display: flex; gap: 0; position: relative; }
+    .flow-steps::before { content: ''; position: absolute; top: 28px; left: calc(16.66% + 28px); right: calc(16.66% + 28px); height: 2px; background: rgba(255,255,255,0.12); }
+    .flow-step { flex: 1; text-align: center; padding: 0 20px; position: relative; }
+    .flow-num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #FDC536, #F9A01B); color: #fff; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; position: relative; z-index: 1; box-shadow: 0 8px 20px rgba(249,160,27,0.4); }
+    .flow-step h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .flow-step p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 200px; margin: 0 auto; }
+
+    .screenshot-section { background: #EFF6FF; padding: 80px 0; }
+    .screenshot-header { text-align: center; margin-bottom: 52px; }
+    .screenshot-frame { border-radius: 18px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.12); border: 1px solid var(--border); background: var(--bg-card); }
+    .screenshot-bar { background: #F1F5F9; padding: 12px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+    .screenshot-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .screenshot-dot.red { background: #FF5F57; }
+    .screenshot-dot.yellow { background: #FFBD2E; }
+    .screenshot-dot.green { background: #28CA41; }
+    .screenshot-url { flex: 1; margin-left: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; font-size: 12px; color: var(--text); }
+    .screenshot-frame img { width: 100%; display: block; }
+    .screenshot-caption { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text); font-weight: 500; }
+    .screenshot-caption span { color: var(--accent); font-weight: 700; }
+
+  .bottom-cta { background: linear-gradient(135deg, #FDC536, #F9A01B, #E87A16); padding: 80px 24px; text-align: center; }
+    .bottom-cta h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .bottom-cta p { font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 32px; }
+    .btn-white { display: inline-flex; align-items: center; gap: 8px; padding: 15px 32px; border-radius: 10px; font-size: 16px; font-weight: 700; background: #fff; color: #EA580C; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.15); transition: all 0.3s ease; }
+    .btn-white:hover { transform: translateY(-2px); }
+    .page-footer { background: #1E40AF; padding: 32px 24px; text-align: center; }
+    .page-footer p { font-size: 13px; color: rgba(255,255,255,0.5); }
+    .page-footer a { color: #FDC536; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .feat-block { grid-template-columns: 1fr; gap: 40px; }
+      .feat-block.reverse { direction: ltr; }
+      .flow-steps { flex-direction: column; gap: 32px; }
+      .flow-steps::before { display: none; }
+      .qstat { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 600px) { .topbar-cta { display: none; } }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  
+    /* ── DARK MODE ── */
+    html.dark {
+      --bg: #0F172A;
+      --bg-card: #1E293B;
+      --primary: #1E293B;
+      --accent: #60A5FA;
+      --text: #94A3B8;
+      --heading: #F8FAFC;
+      --border: #334155;
+    }
+    html.dark .topbar { background: rgba(15,23,42,0.95); }
+    html.dark .page-hero { background: linear-gradient(135deg, #050D1A 0%, #0F1F3D 60%, #050D1A 100%); }
+    html.dark .screenshot-bar { background: #0F172A; }
+    html.dark .screenshot-url { background: #1E293B; border-color: #334155; color: #94A3B8; }
+    html.dark .screenshot-section { background: var(--bg); }
+    html.dark .screenshot-section .section-title { color: var(--heading); }
+    html.dark .screenshot-section .section-sub { color: var(--text); }
+    html.dark .screenshot-section .section-label { color: var(--accent); }
+    html.dark .screenshot-frame { background: var(--bg-card); }
+    html.dark .quick-stats { background: var(--bg-card); }
+    html.dark .page-footer { background: var(--bg-card); border-top: 1px solid var(--border); }
+    html.dark .feat-img-wrap { border-color: var(--border); }
+    html.dark .back-btn { background: var(--bg-card); border-color: var(--border); color: var(--heading); }
+    html.dark .back-btn:hover { background: var(--accent); color: #0F172A; border-color: var(--accent); }
+    html.dark .btn-hero-ghost { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+    html.dark .btn-hero-ghost:hover { background: rgba(255,255,255,0.05); }
+    html.dark .feat-check-icon { background: rgba(96,165,250,0.1); }
+    html.dark .feat-check-icon svg { stroke: var(--accent); }
+    html.dark .btn-white { background: var(--bg-card); color: var(--heading); border: 1px solid var(--border); }
+    html.dark .btn-white:hover { border-color: var(--accent); color: var(--accent); }
+    /* Demo table dark mode */
+    html.dark .resident-demo { border-color: var(--border); }
+    html.dark .resident-demo-header { background: #0F172A; border-color: var(--border); }
+    html.dark .resident-demo-title { color: var(--heading); }
+    html.dark .resident-row { background: var(--bg-card); border-color: var(--border); }
+    html.dark .resident-row:hover { background: #253550; }
+    html.dark .res-name { color: var(--heading); }
+    /* Section interior text */
+    html.dark .section-title { color: #F8FAFC !important; }
+    html.dark .section-sub { color: #94A3B8 !important; }
+    html.dark .section-label { color: #60A5FA !important; }
+    html.dark .feat-text h2 { color: #F8FAFC !important; }
+    html.dark .feat-text p { color: #94A3B8 !important; }
+    html.dark .feat-check { color: #F8FAFC !important; }
+    html.dark .screenshot-caption { color: #94A3B8 !important; }
+
+  </style>
+
+  <script>
+    // Apply dark mode if it was selected in landing
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a href="landing.html" class="back-btn">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Retour
+      </a>
+      <a href="landing.html" class="topbar-logo">
+        <div class="topbar-logo-icon"><img src="logo.png" alt="SyndicPro Logo" /></div>
+        SyndicPro
+      </a>
+      <a href="https://syndic-app-alpha.vercel.app/register" class="topbar-cta">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+        Essai gratuit
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="hero-inner">
+      <div class="feature-badge">
+        <span class="feature-badge-dot"></span>
+        Fonctionnalité
+      </div>
+      <h1>Gestion des <span>Résidents</span></h1>
+      <p>Centralisez les informations de tous vos résidents. Nom, téléphone, appartement assigné, historique de paiement — tout est accessible et à jour en temps réel.</p>
+      <div class="hero-cta-row">
+        <a href="https://syndic-app-alpha.vercel.app/register" class="btn-hero-gold">
+          <svg class="btn-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+          Commencer gratuitement
+        </a>
+        <a href="#screenshot" class="btn-hero-ghost">
+          <svg class="btn-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16 10,8"/></svg>
+          Voir le module
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK STATS -->
+  <div class="quick-stats">
+    <div class="quick-stats-inner">
+      <div class="qstat fade-up">
+        <div class="qstat-num">∞</div>
+        <div class="qstat-label">Résidents gérables</div>
+      </div>
+      <div class="qstat fade-up">
+        <div class="qstat-num">100%</div>
+        <div class="qstat-label">Données centralisées</div>
+      </div>
+      <div class="qstat fade-up">
+        <div class="qstat-num">Instantané</div>
+        <div class="qstat-label">Ajout & modification</div>
+      </div>
+      <div class="qstat fade-up">
+        <div class="qstat-num">Complet</div>
+        <div class="qstat-label">Historique paiements</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="feat-block fade-up">
+        <div class="feat-text">
+          <span class="section-label">Vue d'ensemble</span>
+          <h2>Un profil complet pour chaque résident</h2>
+          <p>Le module Résidents de SyndicPro vous permet de gérer l'ensemble des occupants de votre résidence depuis une interface intuitive. Chaque résident dispose de sa fiche personnelle avec toutes les informations essentielles.</p>
+          <div class="feat-checklist">
+            <div class="feat-check">
+              <div class="feat-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Nom complet, téléphone et email du résident
+            </div>
+            <div class="feat-check">
+              <div class="feat-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Appartement assigné avec lien direct à la fiche
+            </div>
+            <div class="feat-check">
+              <div class="feat-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Date d'entrée et statut (actif / inactif)
+            </div>
+            <div class="feat-check">
+              <div class="feat-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Historique complet des paiements
+            </div>
+            <div class="feat-check">
+              <div class="feat-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Inscription instantanée au système de paiement du mois
+            </div>
+          </div>
+        </div>
+        <div class="feat-img-wrap">
+          <img src="residents.png" alt="Module Résidents SyndicPro" />
+          <div class="img-label">👤 Liste des résidents</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO TABLE -->
+  <section style="background: var(--bg-card); padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="fade-up" style="text-align:center; margin-bottom: 48px;">
+        <span class="section-label">Aperçu interactif</span>
+        <h2 class="section-title">Exemple de liste résidents</h2>
+        <p class="section-sub" style="margin: 0 auto">Voici ce à quoi ressemble votre registre de résidents dans SyndicPro.</p>
+      </div>
+      <div class="resident-demo fade-up">
+        <div class="resident-demo-header">
+          <span class="resident-demo-title">Résidents de la résidence — Juin 2025</span>
+          <span class="res-badge active">42 résidents actifs</span>
+        </div>
+        <div class="resident-row">
+          <div class="res-avatar" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8)">AB</div>
+          <div class="res-info">
+            <div class="res-name">Ahmed Benali</div>
+            <div class="res-apt">Appartement B-204 · Entrée : Jan 2024</div>
+          </div>
+          <div class="res-amount" style="color:#059669">850 DH</div>
+          <div class="res-status paid"><span class="res-dot"></span> Payé</div>
+        </div>
+        <div class="resident-row">
+          <div class="res-avatar" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9)">FZ</div>
+          <div class="res-info">
+            <div class="res-name">Fatima Zahra Idrissi</div>
+            <div class="res-apt">Appartement A-101 · Entrée : Mar 2023</div>
+          </div>
+          <div class="res-amount" style="color:#059669">850 DH</div>
+          <div class="res-status paid"><span class="res-dot"></span> Payé</div>
+        </div>
+        <div class="resident-row">
+          <div class="res-avatar" style="background: linear-gradient(135deg, #F9A01B, #E87A16)">KM</div>
+          <div class="res-info">
+            <div class="res-name">Karim Mansouri</div>
+            <div class="res-apt">Appartement C-312 · Entrée : Juin 2025</div>
+          </div>
+          <div class="res-amount" style="color:#D97706">850 DH</div>
+          <div class="res-status pending"><span class="res-dot"></span> En attente</div>
+        </div>
+        <div class="resident-row">
+          <div class="res-avatar" style="background: linear-gradient(135deg, #10B981, #059669)">SH</div>
+          <div class="res-info">
+            <div class="res-name">Sara Hamdani</div>
+            <div class="res-apt">Appartement D-405 · Entrée : Sep 2022</div>
+          </div>
+          <div class="res-amount" style="color:#059669">850 DH</div>
+          <div class="res-status paid"><span class="res-dot"></span> Payé</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW STEPS -->
+  <section class="flow-section">
+    <div class="container">
+      <div class="flow-header fade-up">
+        <span class="section-label">Processus</span>
+        <h2 class="section-title">Ajouter un résident en 3 étapes</h2>
+        <p class="section-sub">Simple, rapide. Un nouveau résident est opérationnel en moins de 2 minutes.</p>
+      </div>
+      <div class="flow-steps">
+        <div class="flow-step fade-up">
+          <div class="flow-num">1</div>
+          <h3>Créer la fiche</h3>
+          <p>Renseignez le nom, téléphone et email du résident. SyndicPro génère automatiquement sa fiche.</p>
+        </div>
+        <div class="flow-step fade-up">
+          <div class="flow-num">2</div>
+          <h3>Assigner l'appartement</h3>
+          <p>Sélectionnez l'appartement parmi la liste. Le lien entre résident et logement est instantané.</p>
+        </div>
+        <div class="flow-step fade-up">
+          <div class="flow-num">3</div>
+          <h3>Paiement automatique</h3>
+          <p>Le résident est inscrit automatiquement au cycle de paiement du mois en cours, dès son ajout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOT -->
+  <section class="screenshot-section" id="screenshot">
+    <div class="container">
+      <div class="screenshot-header fade-up">
+        <span class="section-label">Capture d'écran</span>
+        <h2 class="section-title">Le module résidents en action</h2>
+        <p class="section-sub" style="margin:0 auto">Voici exactement l'interface que vous utilisez pour gérer vos résidents.</p>
+      </div>
+      <div class="screenshot-frame fade-up">
+        <div class="screenshot-bar">
+          <span class="screenshot-dot red"></span>
+          <span class="screenshot-dot yellow"></span>
+          <span class="screenshot-dot green"></span>
+          <div class="screenshot-url">app.syndicpro.ma/residents</div>
+        </div>
+        <img src="residents.png" alt="Screenshot — Résidents SyndicPro" />
+      </div>
+      <p class="screenshot-caption fade-up">
+        <span>Interface réelle</span> — Aucun mockup. Ce que vous voyez est exactement ce que vous utilisez.
+      </p>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2>Fini les impayés oubliés !</h2>
+    <p>14 jours gratuits. Aucune carte bancaire. Annulation à tout moment.</p>
+    <a href="https://syndic-app-alpha.vercel.app/register" class="btn-white">
+      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+      Créer mon compte gratuit
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <p>© 2025 SyndicPro — <a href="landing.html">Retour à l'accueil</a></p>
+  </div>
+
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const sibs = [...e.target.parentElement.querySelectorAll('.fade-up')];
+          setTimeout(() => e.target.classList.add('visible'), sibs.indexOf(e.target) * 90);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

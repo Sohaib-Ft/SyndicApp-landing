@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SyndicPro — Gérez votre résidence, simplement.</title>
+  <meta name="description"
+    content="SyndicPro centralise la gestion des appartements, charges, paiements et résidents en un seul endroit. Essai gratuit 14 jours, sans carte bancaire." />
+  <meta name="keywords" content="gestion syndic, logiciel syndic, appartements Maroc, charges résidence, SyndicPro" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-light: #F8F9FC;
+      --bg-card: #FFFFFF;
+      --primary: #1E3A5F;
+      --secondary: #2C5282;
+      --accent: #2C5282;
+      --cta-primary: #F97316;
+      --cta-primary-dark: #EA580C;
+      --white: #FFFFFF;
+      --text: #4A5568;
+      --heading: #1E3A5F;
+      --border: #E2E8F0;
+      --badge-bg: rgba(44, 82, 130, 0.1);
+      --badge-text: #2C5282;
+      --radius-card: 12px;
+      --radius-btn: 8px;
+    }
+
+    html.dark {
+      --bg: #0F172A;
+      --bg-light: #1E293B;
+      --bg-card: #1E293B;
+      --primary: #94A3B8;
+      --secondary: #E2E8F0;
+      --accent: #60A5FA;
+      --text: #94A3B8;
+      --heading: #F8FAFC;
+      --border: #334155;
+      --badge-bg: rgba(96, 165, 250, 0.1);
+      --badge-text: #60A5FA;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* ─── UTILITY ──────────────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-btn);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #FDC536 0%, #F9A01B 50%, #E87A16 100%);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.30);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(249, 115, 22, 0.40);
+      background: linear-gradient(135deg, #FDC536 0%, #F9A01B 50%, #E87A16 100%);
+      opacity: 1;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--heading);
+      border-color: var(--heading);
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background: rgba(30, 58, 95, 0.05);
+      color: var(--heading);
+      border-color: var(--heading);
+      opacity: 1;
+    }
+
+    .btn-outline-accent {
+      background: transparent;
+      color: var(--secondary);
+      border-color: var(--secondary);
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-accent:hover {
+      background: rgba(44, 82, 130, 0.05);
+      color: var(--secondary);
+      border-color: var(--secondary);
+      opacity: 1;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--text);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ─── NAVBAR ───────────────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: transparent;
+      box-shadow: none;
+      transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    #navbar.scrolled {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.10);
+    }
+
+    html.dark #navbar.scrolled {
+      background: rgba(15, 23, 42, 0.92);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Nav links white on transparent, dark on scrolled */
+    #navbar:not(.scrolled) .nav-links > li > a {
+      color: rgba(255,255,255,0.92);
+    }
+    #navbar:not(.scrolled) .nav-links > li > a:hover {
+      color: #FDC536;
+    }
+    #navbar:not(.scrolled) .nav-logo {
+      color: #FFFFFF;
+    }
+    #navbar:not(.scrolled) .hamburger span {
+      background: #FFFFFF;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--heading);
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links > li > a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .nav-links > li > a:hover {
+      color: var(--accent);
+    }
+
+    /* ─── DROPDOWN MENU ────────────────────────────────────────────── */
+    .nav-dropdown-wrapper {
+      position: relative;
+    }
+
+    .nav-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .dropdown-chevron {
+      transition: transform 0.25s ease;
+      vertical-align: middle;
+      color: currentColor;
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      width: 580px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 1010;
+    }
+
+    html.dark .nav-dropdown-menu {
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      border-color: var(--border);
+    }
+
+    /* Arrow */
+    .dropdown-arrow {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      z-index: 1011;
+    }
+
+    /* Grid layout */
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      position: relative;
+      z-index: 1012;
+    }
+
+    .dropdown-item {
+      display: flex !important;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      transition: background 0.2s ease, transform 0.2s ease !important;
+      text-align: left;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(44, 82, 130, 0.05);
+      transform: translateY(-2px);
+    }
+
+    html.dark .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .dropdown-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .dropdown-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .dropdown-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dropdown-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--heading) !important;
+    }
+
+    .dropdown-desc {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* Hover and Active states */
+    @media (min-width: 769px) {
+      .nav-dropdown-wrapper:hover .nav-dropdown-menu,
+      .nav-dropdown-wrapper.active .nav-dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(12px);
+      }
+
+      .nav-dropdown-wrapper:hover .dropdown-chevron,
+      .nav-dropdown-wrapper.active .dropdown-chevron {
+        transform: rotate(180deg);
+      }
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-actions .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+
+    /* Ghost white btn (transparent navbar state) */
+    .btn-ghost-white {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.40);
+      color: #FFFFFF;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+    .btn-ghost-white:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.65);
+      opacity: 1;
+    }
+    /* When scrolled: revert ghost btn to default outline */
+    #navbar.scrolled .btn-ghost-white {
+      background: transparent;
+      border-color: var(--heading);
+      color: var(--heading);
+      backdrop-filter: none;
+    }
+    #navbar.scrolled .btn-ghost-white:hover {
+      background: rgba(30,58,95,0.06);
+      opacity: 1;
+    }
+
+    /* Dark mode toggle */
+    .dark-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      color: #FFFFFF;
+    }
+    .dark-toggle:hover {
+      background: rgba(255,255,255,0.28);
+      transform: rotate(20deg);
+    }
+    #navbar.scrolled .dark-toggle {
+      background: var(--bg-light);
+      border-color: var(--border);
+      color: var(--heading);
+    }
+    #navbar.scrolled .dark-toggle:hover {
+      background: var(--border);
+    }
+    .dark-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: opacity 0.3s;
+    }
+    .dark-toggle .icon-sun { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    html.dark .dark-toggle .icon-sun { display: block; }
+    html.dark .dark-toggle .icon-moon { display: none; }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--heading);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ─── MOBILE DRAWER (SIDEBAR) ─────────────────────────────────── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1099;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 320px;
+      background: #0B132B;
+      color: #FFFFFF;
+      z-index: 1100;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .mobile-drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .drawer-header .nav-logo {
+      color: #FFFFFF !important;
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      padding: 4px;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .drawer-close:hover {
+      color: #FFFFFF;
+    }
+
+    .drawer-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .drawer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .drawer-btn {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .btn-outline-light {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-btn);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-outline-light:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #FFFFFF;
+      opacity: 1;
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .drawer-links a {
+      display: block;
+      padding: 12px 16px;
+      border-radius: var(--radius-btn);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .drawer-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(4px);
+    }
+
+    .drawer-features-sec {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .drawer-sec-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 8px;
+      font-weight: 700;
+      padding-left: 4px;
+    }
+
+    .drawer-feat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-btn);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .drawer-feat-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+      transform: translateX(4px);
+    }
+
+    .drawer-feat-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .drawer-feat-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: #38BDF8;
+      fill: none;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 120px 24px 80px;
+      background: var(--primary);
+    }
+
+    .hero-image-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.60) 0%, rgba(15, 23, 42, 0.55) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .hero-h1 {
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    .hero-h1.title-fade-out {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    .hero-sub.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-ctas .btn {
+      padding: 14px 28px;
+      font-size: 16px;
+    }
+
+    .btn-hero-primary {
+      background: linear-gradient(135deg, #FDC536 0%, #F9A01B 50%, #E87A16 100%);
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.35);
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(249, 115, 22, 0.45);
+      background: linear-gradient(135deg, #FDC536 0%, #F9A01B 50%, #E87A16 100%);
+      opacity: 1;
+    }
+
+    .btn-hero-secondary {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      color: white;
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+
+    /* ─── SOCIAL PROOF ─────────────────────────────────────────────── */
+    #social-proof {
+      background: var(--bg);
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 20px 32px;
+    }
+
+    .stat-item+.stat-item {
+      border-left: 1px solid var(--border);
+    }
+
+    .stat-number {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── FEATURES ─────────────────────────────────────────────────── */
+    #features {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 32px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: var(--badge-bg);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon-wrap svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--heading);
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ─── HOW IT WORKS ─────────────────────────────────────────────── */
+    #how-it-works {
+      padding: 100px 0;
+      background: var(--bg-light);
+    }
+
+    .hiw-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .steps-row {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.66% + 28px);
+      right: calc(16.66% + 28px);
+      height: 1px;
+      background: var(--border);
+    }
+
+    .step-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-item h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--heading);
+    }
+
+    .step-item p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.65;
+      max-width: 240px;
+      margin: 0 auto;
+    }
+
+    /* ─── PRICING ──────────────────────────────────────────────────── */
+    #pricing {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .pricing-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 56px;
+    }
+    .pricing-toggle-label { font-size: 14px; font-weight: 600; color: var(--text); }
+    .pricing-toggle-label.active { color: var(--heading); }
+    .pricing-save-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(16,185,129,0.1); color: #059669;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 999px;
+    }
+    html.dark .pricing-save-badge { background: rgba(16,185,129,0.18); color: #34D399; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    /* ── BASE CARD ── */
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 36px 30px 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+      border-color: var(--accent);
+    }
+
+    /* ── TARGET USER CHIP ── */
+    .pricing-persona {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text);
+      background: var(--bg-light); border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 999px;
+      margin-bottom: 22px;
+    }
+    .pricing-persona-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+    /* ── PLAN NAME ── */
+    .pricing-name {
+      font-size: 22px; font-weight: 800;
+      color: var(--heading); margin-bottom: 8px;
+    }
+    .pricing-tagline {
+      font-size: 13px; color: var(--text);
+      line-height: 1.55; margin-bottom: 24px; min-height: 40px;
+    }
+
+    /* ── PRICE BLOCK ── */
+    .pricing-price {
+      display: flex; align-items: flex-end; gap: 4px;
+      margin-bottom: 4px;
+    }
+    .pricing-amount {
+      font-size: 48px; font-weight: 900;
+      color: var(--heading); line-height: 1;
+      letter-spacing: -2px;
+    }
+    .pricing-period {
+      font-size: 14px; color: var(--text);
+      margin-bottom: 6px; font-weight: 500;
+    }
+    .pricing-annual-note {
+      font-size: 12px; color: #059669; font-weight: 600;
+      margin-bottom: 6px; min-height: 18px;
+    }
+    html.dark .pricing-annual-note { color: #34D399; }
+
+    .pricing-divider {
+      height: 1px; background: var(--border); margin: 22px 0;
+    }
+
+    /* ── FEATURES ── */
+    .pricing-features { margin-bottom: 28px; flex: 1; }
+    .pricing-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13.5px; color: var(--heading);
+      padding: 6px 0; line-height: 1.4;
+    }
+    .pricing-feature.off { color: var(--text); opacity: 0.45; }
+    .pricing-feature-category {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text);
+      opacity: 0.6; padding: 12px 0 4px; display: block;
+    }
+    .check-icon, .cross-icon { width: 17px; height: 17px; flex-shrink: 0; margin-top: 1px; }
+    .check-icon { stroke: #10B981; }
+    .cross-icon { stroke: #CBD5E0; }
+
+    /* ── FEATURED (PRO) CARD ── */
+    .pricing-card.featured {
+      background: linear-gradient(160deg, #1E3A5F 0%, #1a3255 100%);
+      border: 2px solid #2C5282;
+      box-shadow: 0 24px 60px rgba(30,58,95,0.30);
+      transform: scale(1.04);
+    }
+    html.dark .pricing-card.featured {
+      background: linear-gradient(160deg, #0F1F3D 0%, #162847 100%);
+      border-color: #3B82F6;
+      box-shadow: 0 24px 60px rgba(59,130,246,0.18);
+    }
+    .pricing-card.featured:hover {
+      transform: scale(1.04) translateY(-4px);
+      box-shadow: 0 32px 72px rgba(30,58,95,0.38);
+    }
+    .pricing-card.featured .pricing-name,
+    .pricing-card.featured .pricing-tagline,
+    .pricing-card.featured .pricing-amount,
+    .pricing-card.featured .pricing-period,
+    .pricing-card.featured .pricing-feature { color: #fff; }
+    .pricing-card.featured .pricing-feature.off { color: rgba(255,255,255,0.35); }
+    .pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.12); }
+    .pricing-card.featured .pricing-feature-category { color: rgba(255,255,255,0.5); }
+    .pricing-card.featured .check-icon { stroke: #FDC536; }
+    .pricing-card.featured .cross-icon { stroke: rgba(255,255,255,0.25); }
+    .pricing-card.featured .pricing-persona { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
+    .pricing-card.featured .pricing-annual-note { color: #FDC536; }
+
+    /* ── POPULAR BADGE ── */
+    .pricing-popular-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #FDC536, #F9A01B);
+      color: #fff; font-size: 11px; font-weight: 800;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 5px 16px; border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(249,160,27,0.4);
+    }
+
+    /* ── LIMIT BADGE ── */
+    .pricing-limit {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700;
+      color: var(--text); background: var(--bg-light);
+      border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .pricing-card.featured .pricing-limit {
+      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .pricing-card .btn {
+      width: 100%; justify-content: center; margin-top: auto;
+    }
+    .pricing-card.featured .btn-primary {
+      background: linear-gradient(135deg, #FDC536, #F9A01B, #E87A16);
+      box-shadow: 0 8px 24px rgba(249,160,27,0.4);
+    }
+    .pricing-card.featured .btn-primary:hover {
+      box-shadow: 0 12px 32px rgba(249,160,27,0.55);
+    }
+
+    @media (max-width: 900px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .pricing-card.featured { transform: none; }
+      .pricing-card.featured:hover { transform: translateY(-4px); }
+    }
+
+    /* ─── TESTIMONIALS ─────────────────────────────────────────────── */
+    #testimonials {
+      padding: 100px 0;
+      background: var(--bg-light);
+    }
+
+    .testi-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 32px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .testi-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .testi-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 18px;
+    }
+
+    .testi-stars svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--accent);
+    }
+
+    .testi-quote {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testi-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--badge-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--badge-text);
+      flex-shrink: 0;
+    }
+
+    .testi-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--heading);
+    }
+
+    .testi-city {
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    /* ─── FINAL CTA ────────────────────────────────────────────────── */
+    #final-cta {
+      padding: 120px 24px;
+      background: #FFFFFF;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+
+    /* decorative blobs — subtle in light mode */
+    #final-cta::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse at center, rgba(253, 197, 54, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #final-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 20%;
+      width: 300px;
+      height: 200px;
+      background: radial-gradient(ellipse at center, rgba(44, 82, 130, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    html.dark #final-cta {
+      background: linear-gradient(135deg, #050D1A 0%, #0F1F3D 50%, #050D1A 100%);
+      border-top-color: rgba(255,255,255,0.06);
+    }
+    html.dark #final-cta::before {
+      background: radial-gradient(ellipse at center, rgba(253, 197, 54, 0.15) 0%, transparent 70%);
+    }
+    html.dark #final-cta::after {
+      background: radial-gradient(ellipse at center, rgba(44, 82, 130, 0.25) 0%, transparent 70%);
+    }
+
+    #final-cta .cta-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    #final-cta .cta-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(253, 197, 54, 0.12);
+      border: 1px solid rgba(253, 197, 54, 0.35);
+      color: #E87A16;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    html.dark #final-cta .cta-label {
+      color: #FDC536;
+    }
+
+    #final-cta .section-title {
+      font-size: clamp(28px, 4vw, 50px);
+      color: var(--heading);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    html.dark #final-cta .section-title {
+      color: #FFFFFF;
+    }
+
+    #final-cta .section-title span {
+      background: linear-gradient(135deg, #FDC536 0%, #F9A01B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #final-cta .section-subtitle {
+      margin-bottom: 40px;
+      color: var(--text);
+      font-size: 17px;
+    }
+    html.dark #final-cta .section-subtitle {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    #final-cta .cta-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    #final-cta .cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    html.dark #final-cta .cta-trust-item {
+      color: rgba(255,255,255,0.55);
+    }
+    #final-cta .cta-trust-item svg {
+      width: 15px;
+      height: 15px;
+      stroke: #F9A01B;
+      fill: none;
+      stroke-width: 2.5;
+    }
+    html.dark #final-cta .cta-trust-item svg {
+      stroke: #FDC536;
+    }
+
+    #final-cta .btn {
+      padding: 16px 40px;
+      font-size: 17px;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      padding: 60px 0 0;
+    }
+
+    html.dark footer {
+      background: var(--bg-light);
+      border-top-color: var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+    }
+
+    .footer-brand .nav-logo {
+      margin-bottom: 12px;
+      color: var(--heading);
+    }
+    html.dark .footer-brand .nav-logo {
+      color: #FFFFFF;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 240px;
+    }
+    html.dark .footer-tagline {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    html.dark .footer-col h4 {
+      color: #FFFFFF;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    html.dark .footer-col ul li a {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--accent);
+    }
+    html.dark .footer-col ul li a:hover {
+      color: #60A5FA;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text);
+    }
+    html.dark .footer-bottom {
+      border-top-color: var(--border);
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-row {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .steps-row::before {
+        display: none;
+      }
+
+      .stats-row {
+        flex-direction: column;
+      }
+
+      .stat-item+.stat-item {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      .hero-ctas .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #hero {
+        padding: 100px 20px 60px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+
+      .footer-grid {
+        gap: 32px;
+      }
+    }
+
+    /* ─── SCROLL ANIMATIONS ────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── TRUST BADGES ─────────────────────────────────────────────── */
+    #trust-badges {
+      background: var(--bg-light);
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-badges-row {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge-card {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trust-badge-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .trust-badge-card.lang::before { background: linear-gradient(90deg, #3B82F6, #60A5FA); }
+    .trust-badge-card.update::before { background: linear-gradient(90deg, #10B981, #34D399); }
+    .trust-badge-card.trial::before { background: linear-gradient(90deg, #F9A01B, #FDC536); }
+
+    .trust-badge-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+    }
+
+    .trust-badge-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+
+    .trust-badge-card.lang .trust-badge-icon { background: rgba(59,130,246,0.1); }
+    .trust-badge-card.update .trust-badge-icon { background: rgba(16,185,129,0.1); }
+    .trust-badge-card.trial .trust-badge-icon { background: rgba(249,160,27,0.1); }
+
+    .trust-badge-info h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 3px;
+    }
+
+    .trust-badge-info p {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .lang-flags {
+      display: flex;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .lang-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* ─── GAGNEZ DU TEMPS ──────────────────────────────────────────── */
+    #gagnez-temps {
+      padding: 100px 0;
+      background: var(--bg-light);
+      overflow: hidden;
+    }
+
+    .gagnez-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .gagnez-text .section-label { margin-bottom: 12px; }
+
+    .gagnez-text h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .gagnez-text h2 span {
+      background: linear-gradient(135deg, #F9A01B, #FDC536);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gagnez-text p {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 480px;
+    }
+
+    .gagnez-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .gagnez-metric {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: border-color 0.2s;
+    }
+
+    .gagnez-metric:hover { border-color: var(--accent); }
+
+    .gagnez-metric-num {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .gagnez-metric-label {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .gagnez-img-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.15);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .browser-bar {
+      background: #F1F5F9;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    html.dark .browser-bar {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .browser-dot.red { background: #FF5F57; }
+    .browser-dot.yellow { background: #FFBD2E; }
+    .browser-dot.green { background: #28CA41; }
+
+    .gagnez-img-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .gagnez-img-badge {
+      background: rgba(15,23,42,0.05);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: var(--heading);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    html.dark .gagnez-img-badge {
+      background: rgba(15,23,42,0.6);
+      border-color: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .gagnez-img-badge-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #FDC536, #F9A01B);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .gagnez-img-badge-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .gagnez-img-badge-text span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ─── SUPPORT ──────────────────────────────────────────────────── */
+    #support {
+      padding: 100px 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .support-img-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+      border: 1px solid var(--border);
+    }
+
+    .support-img-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .support-online-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #059669;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .online-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+      0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+    }
+
+    .support-text h2 {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 800;
+      color: var(--heading);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .support-text p {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+
+    .support-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .support-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--heading);
+    }
+
+    .support-feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .support-cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      background: #25D366;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 18px rgba(37,211,102,0.35);
+      text-decoration: none;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1ebe5c;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(37,211,102,0.45);
+    }
+
+    .btn-whatsapp svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .btn-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      background: var(--bg-card);
+      color: var(--heading);
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-phone:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--badge-bg);
+      transform: translateY(-2px);
+    }
+
+    /* ─── RESPONSIVE EXTRAS ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .trust-badges-row { flex-direction: column; }
+      .gagnez-grid { grid-template-columns: 1fr; gap: 40px; }
+      .support-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-icon">
+          <img src="logo.png" alt="SyndicPro Logo" />
+        </div>
+        SyndicPro
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-dropdown-wrapper">
+          <a href="#features" class="nav-dropdown-trigger" id="dropdown-features-btn">
+            <span>Fonctionnalités</span>
+            <svg class="dropdown-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </a>
+          <div class="nav-dropdown-menu" id="dropdown-features-menu">
+            <div class="dropdown-arrow"></div>
+            <div class="dropdown-grid">
+              <a href="feature-appartements.html" class="dropdown-item">
+                <div class="dropdown-icon" style="background: rgba(253, 197, 54, 0.1); color: #F9A01B;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4" />
+                  </svg>
+                </div>
+                <div class="dropdown-info">
+                  <span class="dropdown-title">Appartements</span>
+                  <span class="dropdown-desc">Gérez tous vos appartements et leurs informations en un clic.</span>
+                </div>
+              </a>
+              <a href="feature-residents.html" class="dropdown-item">
+                <div class="dropdown-icon" style="background: rgba(59, 130, 246, 0.1); color: #3B82F6;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <div class="dropdown-info">
+                  <span class="dropdown-title">Résidents</span>
+                  <span class="dropdown-desc">Ajoutez et gérez vos résidents avec leur historique complet.</span>
+                </div>
+              </a>
+              <a href="feature-paiements.html" class="dropdown-item">
+                <div class="dropdown-icon" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                  </svg>
+                </div>
+                <div class="dropdown-info">
+                  <span class="dropdown-title">Paiements</span>
+                  <span class="dropdown-desc">Suivez les paiements, validez les reçus et générez des rapports PDF.</span>
+                </div>
+              </a>
+              <a href="feature-dashboard.html" class="dropdown-item">
+                <div class="dropdown-icon" style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <line x1="9" y1="3" x2="9" y2="21" />
+                    <line x1="9" y1="9" x2="21" y2="9" />
+                    <line x1="9" y1="15" x2="21" y2="15" />
+                  </svg>
+                </div>
+                <div class="dropdown-info">
+                  <span class="dropdown-title">Dashboard</span>
+                  <span class="dropdown-desc">Visualisez vos données clés en temps réel sur un tableau de bord.</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="#pricing">Tarifs</a></li>
+        <li><a href="#support">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="dark-toggle" id="dark-toggle" aria-label="Basculer le mode sombre">
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <a href="https://syndic-app-alpha.vercel.app/login" class="btn btn-ghost-white" id="btn-connexion">Connexion</a>
+        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-primary" id="btn-essai-navbar">Essai gratuit 14 jours</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  <!-- ═══════════════════════ MOBILE DRAWER (SIDEBAR) ═══════════════════════ -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <div class="mobile-drawer" id="mobile-drawer" role="navigation">
+    <div class="drawer-header">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-icon">
+          <img src="logo.png" alt="SyndicPro Logo" />
+        </div>
+        SyndicPro
+      </a>
+      <button class="drawer-close" id="drawer-close" aria-label="Fermer le menu">&times;</button>
+    </div>
+
+    <div class="drawer-content">
+      <!-- Top Actions -->
+      <div class="drawer-actions">
+        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-primary drawer-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 4px;">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+          </svg>
+          Essai gratuit 14 jours
+        </a>
+        <a href="#how-it-works" class="btn btn-outline-light drawer-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          Demander une démo
+        </a>
+        <a href="#login" class="btn btn-outline-light drawer-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
+          </svg>
+          Connexion
+        </a>
+      </div>
+
+      <!-- Main Navigation Links -->
+      <ul class="drawer-links">
+        <li><a href="#pricing">Tarifs</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Features Section -->
+      <div class="drawer-features-sec">
+        <div class="drawer-sec-title">Fonctionnalités</div>
+        
+        <a href="feature-appartements.html" class="drawer-feat-item">
+          <div class="drawer-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4" />
+            </svg>
+          </div>
+          <span>Gestion des appartements</span>
+        </a>
+
+        <a href="feature-residents.html" class="drawer-feat-item">
+          <div class="drawer-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <span>Gestion des résidents</span>
+        </a>
+
+        <a href="feature-paiements.html" class="drawer-feat-item">
+          <div class="drawer-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+          </div>
+          <span>Suivi des paiements</span>
+        </a>
+
+        <a href="feature-dashboard.html" class="drawer-feat-item">
+          <div class="drawer-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <line x1="9" y1="3" x2="9" y2="21" />
+              <line x1="9" y1="9" x2="21" y2="9" />
+              <line x1="9" y1="15" x2="21" y2="15" />
+            </svg>
+          </div>
+          <span>Tableau de bord</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  </nav>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════════ -->
+  <section id="hero">
+    <div class="hero-image-wrap">
+      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80"
+        alt="SyndicPro Apartment Building" class="hero-bg-img" />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Nouveau — Espace résident disponible
+      </div>
+      <h1 class="hero-h1">Gérez votre résidence,<br>simplement.</h1>
+      <p class="hero-sub">SyndicPro centralise la gestion des appartements, charges, paiements et résidents en un seul
+        endroit.</p>
+      <div class="hero-ctas">
+        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-hero-primary" id="btn-cta-hero-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+          </svg>
+          Commencer gratuitement
+        </a>
+        <a href="#how-it-works" class="btn btn-hero-secondary" id="btn-cta-hero-demo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="10,8 16,12 10,16 10,8" />
+          </svg>
+          Voir la démo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SOCIAL PROOF ═══════════════════ -->
+  <section id="social-proof">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat-item fade-up">
+          <div class="stat-number">+200</div>
+          <div class="stat-label">Syndics actifs</div>
+        </div>
+        <div class="stat-item fade-up">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Satisfaction client</div>
+        </div>
+        <div class="stat-item fade-up">
+          <div class="stat-number">3×</div>
+          <div class="stat-label">Gain de temps</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TRUST BADGES ══════════════════ -->
+  <section id="trust-badges">
+    <div class="container">
+      <div class="trust-badges-row">
+
+        <!-- Badge 1 — 3 Langues -->
+        <div class="trust-badge-card lang fade-up">
+          <div class="trust-badge-icon">🌍</div>
+          <div class="trust-badge-info">
+            <h4>3 Langues supportées</h4>
+            <p>Interface disponible en français, arabe et anglais.</p>
+            <div class="lang-flags">
+              <span class="lang-flag">🇫🇷 FR</span>
+              <span class="lang-flag">🇲🇦 AR</span>
+              <span class="lang-flag">🇬🇧 EN</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badge 2 — Mises à jour -->
+        <div class="trust-badge-card update fade-up">
+          <div class="trust-badge-icon">🔄</div>
+          <div class="trust-badge-info">
+            <h4>Mises à jour incluses</h4>
+            <p>Nouvelles fonctionnalités et améliorations automatiques — sans frais supplémentaires.</p>
+          </div>
+        </div>
+
+        <!-- Badge 3 — 14 jours gratuit -->
+        <div class="trust-badge-card trial fade-up">
+          <div class="trust-badge-icon">🎁</div>
+          <div class="trust-badge-info">
+            <h4>14 jours gratuits</h4>
+            <p>Essayez toutes les fonctionnalités sans carte bancaire. Annulez à tout moment.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FEATURES ═══════════════════════ -->
+  <section id="features">
+    <div class="container">
+      <div class="features-header fade-up">
+        <span class="section-label">Fonctionnalités</span>
+        <h2 class="section-title">Tout ce dont vous avez besoin</h2>
+      </div>
+
+      <div class="features-grid">
+
+        <!-- Card 1 — Appartements -->
+        <a href="feature-appartements.html" class="feature-card fade-up" id="feature-appartements" style="display:block;cursor:pointer;">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4M9 11h1m4 0h1M9 15h1m4 0h1" />
+            </svg>
+          </div>
+          <h3>Appartements</h3>
+          <p>Gérez tous vos appartements et leurs informations en un clic.</p>
+          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </a>
+
+        <!-- Card 2 — Résidents -->
+        <a href="feature-residents.html" class="feature-card fade-up" id="feature-residents" style="display:block;cursor:pointer;">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3>Résidents</h3>
+          <p>Ajoutez et gérez vos résidents avec leur historique complet.</p>
+          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </a>
+
+        <!-- Card 3 — Paiements -->
+        <a href="feature-paiements.html" class="feature-card fade-up" id="feature-paiements" style="display:block;cursor:pointer;">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8" />
+            </svg>
+          </div>
+          <h3>Paiements</h3>
+          <p>Suivez les paiements, validez les reçus et générez des rapports PDF.</p>
+          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </a>
+
+        <!-- Card 4 — Dashboard -->
+        <a href="feature-dashboard.html" class="feature-card fade-up" id="feature-dashboard" style="display:block;cursor:pointer;">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 20V10M12 20V4M6 20v-6" />
+            </svg>
+          </div>
+          <h3>Dashboard</h3>
+          <p>Visualisez vos données clés en temps réel sur un tableau de bord.</p>
+          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ HOW IT WORKS ═══════════════════ -->
+  <section id="how-it-works">
+    <div class="container">
+      <div class="hiw-header fade-up">
+        <span class="section-label">Comment ça marche</span>
+        <h2 class="section-title">Opérationnel en 3 étapes</h2>
+      </div>
+
+      <div class="steps-row">
+        <div class="step-item fade-up" id="step-1">
+          <div class="step-number">1</div>
+          <h3>Créez votre compte</h3>
+          <p>Inscrivez-vous gratuitement en 30 secondes, aucune carte bancaire requise.</p>
+        </div>
+        <div class="step-item fade-up" id="step-2">
+          <div class="step-number">2</div>
+          <h3>Ajoutez votre résidence</h3>
+          <p>Configurez vos appartements, charges et résidents en quelques minutes.</p>
+        </div>
+        <div class="step-item fade-up" id="step-3">
+          <div class="step-number">3</div>
+          <h3>Gérez en temps réel</h3>
+          <p>Suivez paiements, charges et statistiques depuis votre tableau de bord.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ PRICING ════════════════════════ -->
+  <section id="pricing">
+    <div class="container">
+      <div class="pricing-header fade-up">
+        <span class="section-label">Tarifs</span>
+        <h2 class="section-title">Simple et transparent</h2>
+        <p class="section-subtitle">14 jours gratuits, sans carte bancaire.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Free Trial -->
+        <div class="pricing-card fade-up" id="plan-free">
+
+          <div class="pricing-badge neutral">Aucune carte requise</div>
+          <div class="pricing-price">
+            <span class="pricing-amount">0 DH</span>
+            <span class="pricing-period">/ 14 jours</span>
+          </div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Gestion des appartements
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Suivi des charges
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Tableau de bord basique
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Jusqu'à 10 appartements
+            </div>
+            <div class="pricing-feature off">
+              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              Comptes résidents
+            </div>
+            <div class="pricing-feature off">
+              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              Notifications email
+            </div>
+            <div class="pricing-feature off">
+              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              Export PDF
+            </div>
+          </div>
+          <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-outline-accent" id="btn-plan-free">Démarrer l'essai</a>
+        </div>
+
+        <!-- Starter -->
+        <div class="pricing-card featured fade-up" id="plan-starter">
+
+          <div class="pricing-badge">⭐ Le plus populaire</div>
+          <div class="pricing-price">
+            <span class="pricing-amount">99 DH</span>
+            <span class="pricing-period">/ mois</span>
+          </div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Tout du Free Trial
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Jusqu'à 30 appartements
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Notifications email
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Export PDF des reçus
+            </div>
+            <div class="pricing-feature off">
+              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              Comptes résidents
+            </div>
+            <div class="pricing-feature off">
+              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              Multi-résidences
+            </div>
+          </div>
+          <a href="#signup" class="btn btn-primary" id="btn-plan-starter">Choisir Starter</a>
+        </div>
+
+        <!-- Business -->
+        <div class="pricing-card fade-up" id="plan-business">
+
+          <div class="pricing-badge neutral">Pour les pros</div>
+          <div class="pricing-price">
+            <span class="pricing-amount">249 DH</span>
+            <span class="pricing-period">/ mois</span>
+          </div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Tout du Starter
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Comptes résidents illimités
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Multi-résidences
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Statistiques avancées
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Support prioritaire
+            </div>
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              API access
+            </div>
+          </div>
+          <a href="#signup" class="btn btn-outline-accent" id="btn-plan-business">Choisir Business</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TESTIMONIALS ═══════════════════ -->
+  
+
+  <!-- ═══════════════════════ GAGNEZ DU TEMPS ═══════════════ -->
+  <section id="gagnez-temps">
+    <div class="container">
+      <div class="gagnez-grid">
+
+        <!-- Text -->
+        <div class="fade-up">
+          <span class="section-label">Productivité</span>
+          <h2>Gagnez du temps,<br><span>chaque mois</span></h2>
+          <p>Fini les tableurs, les fichiers papier et les appels pour relancer les impayés. SyndicPro automatise votre gestion de A à Z. Concentrez-vous sur l'essentiel — la gestion de votre résidence.</p>
+
+          <div class="gagnez-metrics">
+            <div class="gagnez-metric">
+              <div class="gagnez-metric-num">3×</div>
+              <div class="gagnez-metric-label">Plus rapide qu'avant</div>
+            </div>
+            <div class="gagnez-metric">
+              <div class="gagnez-metric-num">-80%</div>
+              <div class="gagnez-metric-label">De tâches manuelles</div>
+            </div>
+            <div class="gagnez-metric">
+              <div class="gagnez-metric-num">0 DH</div>
+              <div class="gagnez-metric-label">Oublié en impayés</div>
+            </div>
+            <div class="gagnez-metric">
+              <div class="gagnez-metric-num">24/7</div>
+              <div class="gagnez-metric-label">Accès à vos données</div>
+            </div>
+          </div>
+
+          <a href="#signup" class="btn btn-primary" id="btn-commencer-maintenant" style="padding:14px 32px;font-size:16px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+            Commencer maintenant
+          </a>
+        </div>
+
+        <!-- Image -->
+        <div class="gagnez-img-wrap fade-up">
+          <div class="browser-bar">
+            <span class="browser-dot red"></span>
+            <span class="browser-dot yellow"></span>
+            <span class="browser-dot green"></span>
+          </div>
+          <img src="login.png" alt="Gagnez du temps avec SyndicPro" />
+
+           
+      </div>
+      
+    </div>
+  
+  </section>
+
+  <!-- ═══════════════════════ SUPPORT ════════════════════════ -->
+  <section id="support">
+    <div class="container">
+      <div class="support-grid">
+
+        <!-- Image -->
+        <div class="support-img-wrap fade-up">
+          <img src="support-chat.png" alt="Support SyndicPro" />
+          <div class="support-online-badge">
+            <span class="online-dot"></span>
+            Support en ligne
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="fade-up">
+          <span class="section-label">Support</span>
+          <h2 class="support-text" style="font-size:clamp(26px,3.5vw,40px);font-weight:800;color:var(--heading);line-height:1.2;margin-bottom:14px;">Une équipe à votre écoute,<br>quand vous en avez besoin</h2>
+          <p style="font-size:16px;color:var(--text);line-height:1.8;margin-bottom:28px;max-width:460px;">Notre équipe support est disponible pour vous accompagner à chaque étape — de la configuration initiale jusqu'à votre utilisation quotidienne. Réponse rapide garantie.</p>
+
+          <div class="support-features">
+            <div class="support-feature">
+              <div class="support-feature-icon" style="background:rgba(37,211,102,0.1);">✅</div>
+              Réponse en moins de 2 heures
+            </div>
+            <div class="support-feature">
+              <div class="support-feature-icon" style="background:rgba(59,130,246,0.1);">🎓</div>
+              Formation gratuite à la prise en main
+            </div>
+            <div class="support-feature">
+              <div class="support-feature-icon" style="background:rgba(139,92,246,0.1);">📹</div>
+              Tutoriels vidéo disponibles
+            </div>
+            <div class="support-feature">
+              <div class="support-feature-icon" style="background:rgba(249,160,27,0.1);">🔧</div>
+              Assistance technique personnalisée
+            </div>
+          </div>
+
+          <div class="support-cta-row">
+            <a href="https://wa.me/212657118224?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20ou%20d%27informations%20concernant%20l%27application%20de%20syndic.%20Merci%20de%20votre%20assistance." target="_blank" rel="noopener" class="btn-whatsapp" id="btn-whatsapp-support">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a href="tel:+212657118224" class="btn-phone" id="btn-phone-support">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+               Appelez-nous
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="container">
+      <div class="testi-header fade-up">
+        <span class="section-label">Ils nous font confiance</span>
+        <h2 class="section-title">Ce que disent nos syndics</h2>
+      </div>
+
+      <div class="testi-grid">
+
+        <div class="testi-card fade-up" id="testi-1">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <p class="testi-quote">"SyndicPro a transformé notre gestion. Plus de papiers, tout est centralisé et
+            accessible en quelques clics."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AB</div>
+            <div>
+              <div class="testi-name">Ahmed B.</div>
+              <div class="testi-city">Casablanca</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card fade-up" id="testi-2">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <p class="testi-quote">"Le tableau de bord est clair et les résidents adorent leur espace personnel. La
+            transition a été très fluide."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">FZ</div>
+            <div>
+              <div class="testi-name">Fatima Z.</div>
+              <div class="testi-city">Rabat</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card fade-up" id="testi-3">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <p class="testi-quote">"Setup en 10 minutes, support réactif. Je recommande SyndicPro à tous les syndics du
+            Maroc sans hésitation."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">KM</div>
+            <div>
+              <div class="testi-name">Karim M.</div>
+              <div class="testi-city">Marrakech</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FINAL CTA ══════════════════════ -->
+  <section id="final-cta">
+    <div class="container">
+      <div class="cta-inner fade-up" id="cta-block">
+        <div class="cta-label">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          Offre limitée
+        </div>
+        <h2 class="section-title">Prêt à simplifier votre <span>gestion</span> ?</h2>
+        <p class="section-subtitle">14 jours gratuits, sans carte bancaire. Annulez à tout moment.</p>
+        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-primary" id="btn-final-cta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+          Créer mon compte gratuit
+        </a>
+        <div class="cta-trust">
+          <div class="cta-trust-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Sans carte bancaire
+          </div>
+          <div class="cta-trust-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Annulation gratuite
+          </div>
+          <div class="cta-trust-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Support inclus
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═════════════════════════ -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo" style="margin-bottom:14px; display:inline-flex;">
+            <div class="nav-logo-icon">
+              <img src="logo.png" alt="SyndicPro Logo" />
+            </div>
+            SyndicPro
+          </a>
+          <p class="footer-tagline">Gérez votre résidence, simplement. La solution marocaine pour la gestion de syndic.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Produit</h4>
+          <ul>
+            <li><a href="#features">Fonctionnalités</a></li>
+            <li><a href="#pricing">Tarifs</a></li>
+            <li><a href="#how-it-works">Démo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Entreprise</h4>
+          <ul>
+            <li><a href="#contact">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Légal</h4>
+          <ul>
+            <li><a href="#contact">CGU</a></li>
+            <li><a href="#contact">Confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        © 2025 SyndicPro. Fait avec ❤️ au Maroc
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════ JAVASCRIPT ═════════════════════ -->
+  <script>
+    // ── Dark Mode Toggle ─────────────────────────────────────────
+    const htmlEl = document.documentElement;
+    const darkToggle = document.getElementById('dark-toggle');
+
+    // Restore preference
+    if (localStorage.getItem('theme') === 'dark') {
+      htmlEl.classList.add('dark');
+    }
+
+    if (darkToggle) {
+      darkToggle.addEventListener('click', () => {
+        const isDark = htmlEl.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    }
+
+    // ── Navbar transparent → scrolled ────────────────────────────
+    const navbar = document.getElementById('navbar');
+    function updateNavbar() {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    updateNavbar();
+
+    // ── Mobile Drawer (Sidebar) ──────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobile-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    const closeBtn = document.getElementById('drawer-close');
+
+    function openDrawer() {
+      if (drawer && overlay && hamburger) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDrawer() {
+      if (drawer && overlay && hamburger) {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (hamburger && drawer && overlay) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = drawer.classList.contains('active');
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      overlay.addEventListener('click', closeDrawer);
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+      // Close when clicking any link inside the drawer
+      drawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeDrawer);
+      });
+    }
+
+    // ── Desktop Features Dropdown ───────────────────────────────
+    const dropdownTrigger = document.getElementById('dropdown-features-btn');
+    const dropdownWrapper = dropdownTrigger ? dropdownTrigger.parentElement : null;
+
+    if (dropdownTrigger && dropdownWrapper) {
+      // Toggle dropdown on click
+      dropdownTrigger.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdownWrapper.classList.toggle('active');
+        }
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdownWrapper.contains(e.target)) {
+          dropdownWrapper.classList.remove('active');
+        }
+      });
+
+      // Close dropdown when clicking any item inside it
+      dropdownWrapper.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+          dropdownWrapper.classList.remove('active');
+        });
+      });
+    }
+
+    // ── Intersection Observer — fade-up ────────────────────────
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // stagger siblings inside same parent
+          const siblings = [...entry.target.parentElement.querySelectorAll('.fade-up')];
+          const idx = siblings.indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, idx * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // ── Smooth scroll for all internal links ───────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Hero video fallback (Disabled) ─────────────────────────
+    // Background image is static and does not require fallback handling.
+
+    // ── Counter animation for stats ─────────────────────────────
+    function animateCounter(el, target, suffix, duration) {
+      let start = 0;
+      const step = Math.ceil(target / (duration / 16));
+      const timer = setInterval(() => {
+        start = Math.min(start + step, target);
+        el.textContent = (suffix === '×' ? start + '×' : (start < target ? start : target) + suffix);
+        if (start >= target) clearInterval(timer);
+      }, 16);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nums = entry.target.querySelectorAll('.stat-number');
+          // +200, 98%, 3×
+          animateCounter(nums[0], 200, '+', 1200);
+          animateCounter(nums[1], 98, '%', 1000);
+          animateCounter(nums[2], 3, '×', 600);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.getElementById('social-proof');
+    if (statsSection) statsObserver.observe(statsSection);
+
+    // ── Hero subtitle & title rotator ──────────────────────────────
+    const heroSubs = [
+      "SyndicPro centralise la gestion des appartements, charges, paiements et résidents en un seul endroit.",
+      "Suivez les paiements, validez les reçus et gérez les budgets en toute simplicité.",
+      "Offrez à vos résidents un espace personnel moderne pour suivre leurs règlements.",
+      "Gagnez du temps au quotidien et pilotez votre copropriété en toute transparence."
+    ];
+    const heroTitles = [
+      "Gérez votre résidence,<br>simplement.",
+      "Suivez vos finances,<br>efficacement.",
+      "Pilotez votre copropriété,<br>sereinement.",
+      "Simplifiez la vie de<br>vos résidents."
+    ];
+    let subIdx = 0;
+    const subEl = document.querySelector('.hero-sub');
+    const titleEl = document.querySelector('.hero-h1');
+
+    if (subEl || titleEl) {
+      setInterval(() => {
+        if (subEl) subEl.classList.add('fade-out');
+        if (titleEl) titleEl.classList.add('title-fade-out');
+
+        setTimeout(() => {
+          subIdx = (subIdx + 1) % heroSubs.length;
+          if (subEl) subEl.textContent = heroSubs[subIdx];
+          if (titleEl) titleEl.innerHTML = heroTitles[subIdx];
+
+          if (subEl) subEl.classList.remove('fade-out');
+          if (titleEl) titleEl.classList.remove('title-fade-out');
+        }, 500); // Matches CSS transition duration
+      }, 4000); // Cycles every 4 seconds
+    }
+  </script>
+</body>
+
+</html>

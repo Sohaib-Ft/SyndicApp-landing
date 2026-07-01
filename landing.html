@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SyndicPro — Gérez votre résidence, simplement.</title>
   <meta name="description"
-    content="SyndicP centralise la gestion des appartements, charges, paiements et résidents en un seul endroit. Essai gratuit 14 jours, sans carte bancaire." />
-  <meta name="keywords" content="gestion syndic, logiciel syndic, appartements Maroc, charges résidence, SyndicP" />
+    content="SyndicPro centralise la gestion des appartements, charges, paiements et résidents en un seul endroit. Essai gratuit 14 jours, sans carte bancaire." />
+  <meta name="keywords" content="gestion syndic, logiciel syndic, appartements Maroc, charges résidence, SyndicPro" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -103,7 +103,7 @@
       border: 2px solid transparent;
       transition: opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
       white-space: nowrap;
-      
+
     }
 
     .btn:hover {
@@ -203,15 +203,18 @@
     }
 
     /* Nav links white on transparent, dark on scrolled */
-    #navbar:not(.scrolled) .nav-links > li > a {
-      color: rgba(255,255,255,0.92);
+    #navbar:not(.scrolled) .nav-links>li>a {
+      color: rgba(255, 255, 255, 0.92);
     }
-    #navbar:not(.scrolled) .nav-links > li > a:hover {
+
+    #navbar:not(.scrolled) .nav-links>li>a:hover {
       color: #FDC536;
     }
+
     #navbar:not(.scrolled) .nav-logo {
       color: #FFFFFF;
     }
+
     #navbar:not(.scrolled) .hamburger span {
       background: #FFFFFF;
     }
@@ -257,14 +260,14 @@
       gap: 36px;
     }
 
-    .nav-links > li > a {
+    .nav-links>li>a {
       font-size: 15px;
       font-weight: 500;
       color: var(--text);
       transition: color 0.2s;
     }
 
-    .nav-links > li > a:hover {
+    .nav-links>li>a:hover {
       color: var(--accent);
     }
 
@@ -388,6 +391,7 @@
 
     /* Hover and Active states */
     @media (min-width: 769px) {
+
       .nav-dropdown-wrapper:hover .nav-dropdown-menu,
       .nav-dropdown-wrapper.active .nav-dropdown-menu {
         opacity: 1;
@@ -414,17 +418,19 @@
 
     /* Ghost white btn (transparent navbar state) */
     .btn-ghost-white {
-      background: rgba(255,255,255,0.15);
-      border: 1.5px solid rgba(255,255,255,0.40);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.40);
       color: #FFFFFF;
       transition: all 0.3s ease;
       backdrop-filter: blur(6px);
     }
+
     .btn-ghost-white:hover {
-      background: rgba(255,255,255,0.25);
-      border-color: rgba(255,255,255,0.65);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.65);
       opacity: 1;
     }
+
     /* When scrolled: revert ghost btn to default outline */
     #navbar.scrolled .btn-ghost-white {
       background: transparent;
@@ -432,8 +438,9 @@
       color: var(--heading);
       backdrop-filter: none;
     }
+
     #navbar.scrolled .btn-ghost-white:hover {
-      background: rgba(30,58,95,0.06);
+      background: rgba(30, 58, 95, 0.06);
       opacity: 1;
     }
 
@@ -442,8 +449,8 @@
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -452,18 +459,22 @@
       flex-shrink: 0;
       color: #FFFFFF;
     }
+
     .dark-toggle:hover {
-      background: rgba(255,255,255,0.28);
+      background: rgba(255, 255, 255, 0.28);
       transform: rotate(20deg);
     }
+
     #navbar.scrolled .dark-toggle {
       background: var(--bg-light);
       border-color: var(--border);
       color: var(--heading);
     }
+
     #navbar.scrolled .dark-toggle:hover {
       background: var(--border);
     }
+
     .dark-toggle svg {
       width: 18px;
       height: 18px;
@@ -472,10 +483,22 @@
       stroke-width: 2;
       transition: opacity 0.3s;
     }
-    .dark-toggle .icon-sun { display: none; }
-    .dark-toggle .icon-moon { display: block; }
-    html.dark .dark-toggle .icon-sun { display: block; }
-    html.dark .dark-toggle .icon-moon { display: none; }
+
+    .dark-toggle .icon-sun {
+      display: none;
+    }
+
+    .dark-toggle .icon-moon {
+      display: block;
+    }
+
+    html.dark .dark-toggle .icon-sun {
+      display: block;
+    }
+
+    html.dark .dark-toggle .icon-moon {
+      display: none;
+    }
 
     /* hamburger */
     .hamburger {
@@ -843,7 +866,7 @@
 
     /* ─── SOCIAL PROOF ─────────────────────────────────────────────── */
     #social-proof {
-      background: var(--bg);
+      background: var(--bg-light);
       padding: 40px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -1015,182 +1038,109 @@
 
     .pricing-header {
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 60px;
     }
-
-    .pricing-toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 56px;
-    }
-    .pricing-toggle-label { font-size: 14px; font-weight: 600; color: var(--text); }
-    .pricing-toggle-label.active { color: var(--heading); }
-    .pricing-save-badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      background: rgba(16,185,129,0.1); color: #059669;
-      font-size: 11px; font-weight: 700; padding: 3px 10px;
-      border-radius: 999px;
-    }
-    html.dark .pricing-save-badge { background: rgba(16,185,129,0.18); color: #34D399; }
 
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      align-items: stretch;
+      align-items: start;
     }
 
-    /* ── BASE CARD ── */
     .pricing-card {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 36px 30px 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 36px 28px;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: border-color 0.2s;
     }
+
     .pricing-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 48px rgba(0,0,0,0.08);
       border-color: var(--accent);
     }
 
-    /* ── TARGET USER CHIP ── */
-    .pricing-persona {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--text);
-      background: var(--bg-light); border: 1px solid var(--border);
-      padding: 4px 12px; border-radius: 999px;
-      margin-bottom: 22px;
-    }
-    .pricing-persona-dot { width: 7px; height: 7px; border-radius: 50%; }
-
-    /* ── PLAN NAME ── */
-    .pricing-name {
-      font-size: 22px; font-weight: 800;
-      color: var(--heading); margin-bottom: 8px;
-    }
-    .pricing-tagline {
-      font-size: 13px; color: var(--text);
-      line-height: 1.55; margin-bottom: 24px; min-height: 40px;
-    }
-
-    /* ── PRICE BLOCK ── */
-    .pricing-price {
-      display: flex; align-items: flex-end; gap: 4px;
-      margin-bottom: 4px;
-    }
-    .pricing-amount {
-      font-size: 48px; font-weight: 900;
-      color: var(--heading); line-height: 1;
-      letter-spacing: -2px;
-    }
-    .pricing-period {
-      font-size: 14px; color: var(--text);
-      margin-bottom: 6px; font-weight: 500;
-    }
-    .pricing-annual-note {
-      font-size: 12px; color: #059669; font-weight: 600;
-      margin-bottom: 6px; min-height: 18px;
-    }
-    html.dark .pricing-annual-note { color: #34D399; }
-
-    .pricing-divider {
-      height: 1px; background: var(--border); margin: 22px 0;
-    }
-
-    /* ── FEATURES ── */
-    .pricing-features { margin-bottom: 28px; flex: 1; }
-    .pricing-feature {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 13.5px; color: var(--heading);
-      padding: 6px 0; line-height: 1.4;
-    }
-    .pricing-feature.off { color: var(--text); opacity: 0.45; }
-    .pricing-feature-category {
-      font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text);
-      opacity: 0.6; padding: 12px 0 4px; display: block;
-    }
-    .check-icon, .cross-icon { width: 17px; height: 17px; flex-shrink: 0; margin-top: 1px; }
-    .check-icon { stroke: #10B981; }
-    .cross-icon { stroke: #CBD5E0; }
-
-    /* ── FEATURED (PRO) CARD ── */
     .pricing-card.featured {
-      background: linear-gradient(160deg, #1E3A5F 0%, #1a3255 100%);
-      border: 2px solid #2C5282;
-      box-shadow: 0 24px 60px rgba(30,58,95,0.30);
-      transform: scale(1.04);
-    }
-    html.dark .pricing-card.featured {
-      background: linear-gradient(160deg, #0F1F3D 0%, #162847 100%);
-      border-color: #3B82F6;
-      box-shadow: 0 24px 60px rgba(59,130,246,0.18);
-    }
-    .pricing-card.featured:hover {
-      transform: scale(1.04) translateY(-4px);
-      box-shadow: 0 32px 72px rgba(30,58,95,0.38);
-    }
-    .pricing-card.featured .pricing-name,
-    .pricing-card.featured .pricing-tagline,
-    .pricing-card.featured .pricing-amount,
-    .pricing-card.featured .pricing-period,
-    .pricing-card.featured .pricing-feature { color: #fff; }
-    .pricing-card.featured .pricing-feature.off { color: rgba(255,255,255,0.35); }
-    .pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.12); }
-    .pricing-card.featured .pricing-feature-category { color: rgba(255,255,255,0.5); }
-    .pricing-card.featured .check-icon { stroke: #FDC536; }
-    .pricing-card.featured .cross-icon { stroke: rgba(255,255,255,0.25); }
-    .pricing-card.featured .pricing-persona { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
-    .pricing-card.featured .pricing-annual-note { color: #FDC536; }
-
-    /* ── POPULAR BADGE ── */
-    .pricing-popular-badge {
-      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-      display: inline-flex; align-items: center; gap: 6px;
-      background: linear-gradient(135deg, #FDC536, #F9A01B);
-      color: #fff; font-size: 11px; font-weight: 800;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      padding: 5px 16px; border-radius: 999px;
-      white-space: nowrap;
-      box-shadow: 0 4px 14px rgba(249,160,27,0.4);
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
     }
 
-    /* ── LIMIT BADGE ── */
-    .pricing-limit {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 700;
-      color: var(--text); background: var(--bg-light);
-      border: 1px solid var(--border);
-      padding: 5px 14px; border-radius: 999px;
+    .pricing-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
       margin-bottom: 20px;
     }
-    .pricing-card.featured .pricing-limit {
-      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.85);
+
+    .pricing-badge.neutral {
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .pricing-price {
+      margin-bottom: 6px;
+    }
+
+    .pricing-amount {
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--heading);
+      line-height: 1;
+    }
+
+    .pricing-period {
+      font-size: 15px;
+      color: var(--text);
+      margin-left: 4px;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .pricing-features {
+      margin-bottom: 28px;
+    }
+
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--heading);
+      padding: 7px 0;
+    }
+
+    .pricing-feature.off {
+      color: #CBD5E0;
+    }
+
+    .check-icon,
+    .cross-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .check-icon {
+      stroke: var(--accent);
+    }
+
+    .cross-icon {
+      stroke: #CBD5E0;
     }
 
     .pricing-card .btn {
-      width: 100%; justify-content: center; margin-top: auto;
-    }
-    .pricing-card.featured .btn-primary {
-      background: linear-gradient(135deg, #FDC536, #F9A01B, #E87A16);
-      box-shadow: 0 8px 24px rgba(249,160,27,0.4);
-    }
-    .pricing-card.featured .btn-primary:hover {
-      box-shadow: 0 12px 32px rgba(249,160,27,0.55);
-    }
-
-    @media (max-width: 900px) {
-      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-      .pricing-card.featured { transform: none; }
-      .pricing-card.featured:hover { transform: translateY(-4px); }
+      width: 100%;
+      justify-content: center;
     }
 
     /* ─── TESTIMONIALS ─────────────────────────────────────────────── */
@@ -1295,6 +1245,7 @@
       background: radial-gradient(ellipse at center, rgba(253, 197, 54, 0.07) 0%, transparent 70%);
       pointer-events: none;
     }
+
     #final-cta::after {
       content: '';
       position: absolute;
@@ -1308,11 +1259,13 @@
 
     html.dark #final-cta {
       background: linear-gradient(135deg, #050D1A 0%, #0F1F3D 50%, #050D1A 100%);
-      border-top-color: rgba(255,255,255,0.06);
+      border-top-color: rgba(255, 255, 255, 0.06);
     }
+
     html.dark #final-cta::before {
       background: radial-gradient(ellipse at center, rgba(253, 197, 54, 0.15) 0%, transparent 70%);
     }
+
     html.dark #final-cta::after {
       background: radial-gradient(ellipse at center, rgba(44, 82, 130, 0.25) 0%, transparent 70%);
     }
@@ -1337,6 +1290,7 @@
       border-radius: 999px;
       margin-bottom: 24px;
     }
+
     html.dark #final-cta .cta-label {
       color: #FDC536;
     }
@@ -1347,6 +1301,7 @@
       margin-bottom: 16px;
       line-height: 1.15;
     }
+
     html.dark #final-cta .section-title {
       color: #FFFFFF;
     }
@@ -1363,6 +1318,7 @@
       color: var(--text);
       font-size: 17px;
     }
+
     html.dark #final-cta .section-subtitle {
       color: rgba(255, 255, 255, 0.65);
     }
@@ -1384,9 +1340,11 @@
       color: var(--text);
       font-weight: 500;
     }
+
     html.dark #final-cta .cta-trust-item {
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.55);
     }
+
     #final-cta .cta-trust-item svg {
       width: 15px;
       height: 15px;
@@ -1394,6 +1352,7 @@
       fill: none;
       stroke-width: 2.5;
     }
+
     html.dark #final-cta .cta-trust-item svg {
       stroke: #FDC536;
     }
@@ -1426,6 +1385,7 @@
       margin-bottom: 12px;
       color: var(--heading);
     }
+
     html.dark .footer-brand .nav-logo {
       color: #FFFFFF;
     }
@@ -1436,6 +1396,7 @@
       line-height: 1.6;
       max-width: 240px;
     }
+
     html.dark .footer-tagline {
       color: rgba(255, 255, 255, 0.55);
     }
@@ -1447,6 +1408,7 @@
       margin-bottom: 16px;
       letter-spacing: 0.04em;
     }
+
     html.dark .footer-col h4 {
       color: #FFFFFF;
     }
@@ -1462,6 +1424,7 @@
       color: var(--text);
       transition: color 0.2s;
     }
+
     html.dark .footer-col ul li a {
       color: rgba(255, 255, 255, 0.55);
     }
@@ -1469,6 +1432,7 @@
     .footer-col ul li a:hover {
       color: var(--accent);
     }
+
     html.dark .footer-col ul li a:hover {
       color: #60A5FA;
     }
@@ -1480,6 +1444,7 @@
       font-size: 13px;
       color: var(--text);
     }
+
     html.dark .footer-bottom {
       border-top-color: var(--border);
       color: rgba(255, 255, 255, 0.45);
@@ -1605,19 +1570,29 @@
     .trust-badge-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 3px;
       border-radius: 14px 14px 0 0;
     }
 
-    .trust-badge-card.lang::before { background: linear-gradient(90deg, #3B82F6, #60A5FA); }
-    .trust-badge-card.update::before { background: linear-gradient(90deg, #10B981, #34D399); }
-    .trust-badge-card.trial::before { background: linear-gradient(90deg, #F9A01B, #FDC536); }
+    .trust-badge-card.lang::before {
+      background: linear-gradient(90deg, #3B82F6, #60A5FA);
+    }
+
+    .trust-badge-card.update::before {
+      background: linear-gradient(90deg, #10B981, #34D399);
+    }
+
+    .trust-badge-card.trial::before {
+      background: linear-gradient(90deg, #F9A01B, #FDC536);
+    }
 
     .trust-badge-card:hover {
       border-color: var(--accent);
       transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
     }
 
     .trust-badge-icon {
@@ -1631,9 +1606,17 @@
       font-size: 22px;
     }
 
-    .trust-badge-card.lang .trust-badge-icon { background: rgba(59,130,246,0.1); }
-    .trust-badge-card.update .trust-badge-icon { background: rgba(16,185,129,0.1); }
-    .trust-badge-card.trial .trust-badge-icon { background: rgba(249,160,27,0.1); }
+    .trust-badge-card.lang .trust-badge-icon {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .trust-badge-card.update .trust-badge-icon {
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .trust-badge-card.trial .trust-badge-icon {
+      background: rgba(249, 160, 27, 0.1);
+    }
 
     .trust-badge-info h4 {
       font-size: 15px;
@@ -1670,18 +1653,20 @@
     /* ─── GAGNEZ DU TEMPS ──────────────────────────────────────────── */
     #gagnez-temps {
       padding: 100px 0;
-      background: var(--bg-light);
+      background: var(--bg);
       overflow: hidden;
     }
 
     .gagnez-grid {
       display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 60px;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
       align-items: center;
     }
 
-    .gagnez-text .section-label { margin-bottom: 12px; }
+    .gagnez-text .section-label {
+      margin-bottom: 12px;
+    }
 
     .gagnez-text h2 {
       font-size: clamp(28px, 4vw, 44px);
@@ -1721,7 +1706,9 @@
       transition: border-color 0.2s;
     }
 
-    .gagnez-metric:hover { border-color: var(--accent); }
+    .gagnez-metric:hover {
+      border-color: var(--accent);
+    }
 
     .gagnez-metric-num {
       font-size: 26px;
@@ -1741,50 +1728,29 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.15);
-      border: 1px solid var(--border);
-      background: var(--bg-card);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.15);
     }
-
-    .browser-bar {
-      background: #F1F5F9;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    html.dark .browser-bar {
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .browser-dot.red { background: #FF5F57; }
-    .browser-dot.yellow { background: #FFBD2E; }
-    .browser-dot.green { background: #28CA41; }
 
     .gagnez-img-wrap img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
     .gagnez-img-badge {
-      background: rgba(15,23,42,0.05);
-      border: 1px solid var(--border);
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 14px;
       padding: 14px 18px;
-      color: var(--heading);
-      display: inline-flex;
+      color: #fff;
+      display: flex;
       align-items: center;
       gap: 12px;
-      margin-top: 24px;
-    }
-
-    html.dark .gagnez-img-badge {
-      background: rgba(15,23,42,0.6);
-      border-color: rgba(255,255,255,0.1);
-      color: #fff;
     }
 
     .gagnez-img-badge-icon {
@@ -1807,13 +1773,13 @@
 
     .gagnez-img-badge-text span {
       font-size: 12px;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255, 255, 255, 0.65);
     }
 
     /* ─── SUPPORT ──────────────────────────────────────────────────── */
     #support {
       padding: 100px 0;
-      background: var(--bg);
+      background: var(--bg-light);
       border-top: 1px solid var(--border);
     }
 
@@ -1828,7 +1794,7 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
       border: 1px solid var(--border);
     }
 
@@ -1850,7 +1816,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
     .online-dot {
@@ -1862,8 +1828,15 @@
     }
 
     @keyframes pulse-green {
-      0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
-      50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+      }
     }
 
     .support-text h2 {
@@ -1928,14 +1901,14 @@
       color: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 6px 18px rgba(37,211,102,0.35);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
       text-decoration: none;
     }
 
     .btn-whatsapp:hover {
       background: #1ebe5c;
       transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(37,211,102,0.45);
+      box-shadow: 0 10px 26px rgba(37, 211, 102, 0.45);
     }
 
     .btn-whatsapp svg {
@@ -1969,9 +1942,19 @@
 
     /* ─── RESPONSIVE EXTRAS ─────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .trust-badges-row { flex-direction: column; }
-      .gagnez-grid { grid-template-columns: 1fr; gap: 40px; }
-      .support-grid { grid-template-columns: 1fr; gap: 40px; }
+      .trust-badges-row {
+        flex-direction: column;
+      }
+
+      .gagnez-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .support-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
   </style>
 </head>
@@ -1992,7 +1975,8 @@
         <li class="nav-dropdown-wrapper">
           <a href="#features" class="nav-dropdown-trigger" id="dropdown-features-btn">
             <span>Fonctionnalités</span>
-            <svg class="dropdown-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="dropdown-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </a>
@@ -2001,7 +1985,8 @@
             <div class="dropdown-grid">
               <a href="feature-appartements.html" class="dropdown-item">
                 <div class="dropdown-icon" style="background: rgba(253, 197, 54, 0.1); color: #F9A01B;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4" />
                   </svg>
                 </div>
@@ -2012,7 +1997,8 @@
               </a>
               <a href="feature-residents.html" class="dropdown-item">
                 <div class="dropdown-icon" style="background: rgba(59, 130, 246, 0.1); color: #3B82F6;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                     <circle cx="9" cy="7" r="4" />
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -2026,19 +2012,22 @@
               </a>
               <a href="feature-paiements.html" class="dropdown-item">
                 <div class="dropdown-icon" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
                     <line x1="1" y1="10" x2="23" y2="10" />
                   </svg>
                 </div>
                 <div class="dropdown-info">
                   <span class="dropdown-title">Paiements</span>
-                  <span class="dropdown-desc">Suivez les paiements, validez les reçus et générez des rapports PDF.</span>
+                  <span class="dropdown-desc">Suivez les paiements, validez les reçus et générez des rapports
+                    PDF.</span>
                 </div>
               </a>
               <a href="feature-dashboard.html" class="dropdown-item">
                 <div class="dropdown-icon" style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                     <line x1="9" y1="3" x2="9" y2="21" />
                     <line x1="9" y1="9" x2="21" y2="9" />
@@ -2054,16 +2043,28 @@
           </div>
         </li>
         <li><a href="#pricing">Tarifs</a></li>
-        <li><a href="#support">Contact</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
         <button class="dark-toggle" id="dark-toggle" aria-label="Basculer le mode sombre">
-          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
         </button>
-        <a href="https://syndic-app-alpha.vercel.app/login" class="btn btn-ghost-white" id="btn-connexion">Connexion</a>
-        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-primary" id="btn-essai-navbar">Essai gratuit 14 jours</a>
+        <a href="#login" class="btn btn-ghost-white" id="btn-connexion">Connexion</a>
+        <a href="https://syndic-app-alpha.vercel.app" class="btn btn-primary" id="btn-essai-navbar">Essai gratuit 14 jours</a>
       </div>
 
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -2071,100 +2072,107 @@
       </button>
     </div>
 
-  <!-- ═══════════════════════ MOBILE DRAWER (SIDEBAR) ═══════════════════════ -->
-  <div class="drawer-overlay" id="drawer-overlay"></div>
-  <div class="mobile-drawer" id="mobile-drawer" role="navigation">
-    <div class="drawer-header">
-      <a href="#hero" class="nav-logo">
-        <div class="nav-logo-icon">
-          <img src="logo.png" alt="SyndicPro Logo" />
+    <!-- ═══════════════════════ MOBILE DRAWER (SIDEBAR) ═══════════════════════ -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="mobile-drawer" id="mobile-drawer" role="navigation">
+      <div class="drawer-header">
+        <a href="#hero" class="nav-logo">
+          <div class="nav-logo-icon">
+            <img src="logo.png" alt="SyndicPro Logo" />
+          </div>
+          SyndicPro
+        </a>
+        <button class="drawer-close" id="drawer-close" aria-label="Fermer le menu">&times;</button>
+      </div>
+
+      <div class="drawer-content">
+        <!-- Top Actions -->
+        <div class="drawer-actions">
+          <a href="https://syndic-app-alpha.vercel.app" class="btn btn-primary drawer-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              style="margin-right: 4px;">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+            </svg>
+            Essai gratuit 14 jours
+          </a>
+          <a href="#how-it-works" class="btn btn-outline-light drawer-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="margin-right: 4px;">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Demander une démo
+          </a>
+          <a href="#login" class="btn btn-outline-light drawer-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="margin-right: 4px;">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+            </svg>
+            Connexion
+          </a>
         </div>
-        SyndicPro
-      </a>
-      <button class="drawer-close" id="drawer-close" aria-label="Fermer le menu">&times;</button>
-    </div>
 
-    <div class="drawer-content">
-      <!-- Top Actions -->
-      <div class="drawer-actions">
-        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-primary drawer-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 4px;">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
-          </svg>
-          Essai gratuit 14 jours
-        </a>
-        <a href="#how-it-works" class="btn btn-outline-light drawer-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
-          Demander une démo
-        </a>
-        <a href="#login" class="btn btn-outline-light drawer-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
-          </svg>
-          Connexion
-        </a>
-      </div>
+        <!-- Main Navigation Links -->
+        <ul class="drawer-links">
+          <li><a href="#pricing">Tarifs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
 
-      <!-- Main Navigation Links -->
-      <ul class="drawer-links">
-        <li><a href="#pricing">Tarifs</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+        <!-- Features Section -->
+        <div class="drawer-features-sec">
+          <div class="drawer-sec-title">Fonctionnalités</div>
 
-      <!-- Features Section -->
-      <div class="drawer-features-sec">
-        <div class="drawer-sec-title">Fonctionnalités</div>
-        
-        <a href="feature-appartements.html" class="drawer-feat-item">
-          <div class="drawer-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4" />
-            </svg>
-          </div>
-          <span>Gestion des appartements</span>
-        </a>
+          <a href="feature-appartements.html" class="drawer-feat-item">
+            <div class="drawer-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4" />
+              </svg>
+            </div>
+            <span>Gestion des appartements</span>
+          </a>
 
-        <a href="feature-residents.html" class="drawer-feat-item">
-          <div class="drawer-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </div>
-          <span>Gestion des résidents</span>
-        </a>
+          <a href="feature-residents.html" class="drawer-feat-item">
+            <div class="drawer-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <span>Gestion des résidents</span>
+          </a>
 
-        <a href="feature-paiements.html" class="drawer-feat-item">
-          <div class="drawer-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-              <line x1="1" y1="10" x2="23" y2="10" />
-            </svg>
-          </div>
-          <span>Suivi des paiements</span>
-        </a>
+          <a href="feature-paiements.html" class="drawer-feat-item">
+            <div class="drawer-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                <line x1="1" y1="10" x2="23" y2="10" />
+              </svg>
+            </div>
+            <span>Suivi des paiements</span>
+          </a>
 
-        <a href="feature-dashboard.html" class="drawer-feat-item">
-          <div class="drawer-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-              <line x1="9" y1="3" x2="9" y2="21" />
-              <line x1="9" y1="9" x2="21" y2="9" />
-              <line x1="9" y1="15" x2="21" y2="15" />
-            </svg>
-          </div>
-          <span>Tableau de bord</span>
-        </a>
+          <a href="feature-dashboard.html" class="drawer-feat-item">
+            <div class="drawer-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="9" y1="3" x2="9" y2="21" />
+                <line x1="9" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="15" x2="21" y2="15" />
+              </svg>
+            </div>
+            <span>Tableau de bord</span>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
   </nav>
 
   <!-- ═══════════════════════ HERO ═══════════════════════════ -->
@@ -2184,7 +2192,7 @@
       <p class="hero-sub">SyndicPro centralise la gestion des appartements, charges, paiements et résidents en un seul
         endroit.</p>
       <div class="hero-ctas">
-        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-hero-primary" id="btn-cta-hero-primary">
+        <a href="https://syndic-app-alpha.vercel.app" class="btn btn-hero-primary" id="btn-cta-hero-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
           </svg>
@@ -2273,7 +2281,8 @@
       <div class="features-grid">
 
         <!-- Card 1 — Appartements -->
-        <a href="feature-appartements.html" class="feature-card fade-up" id="feature-appartements" style="display:block;cursor:pointer;">
+        <a href="feature-appartements.html" class="feature-card fade-up" id="feature-appartements"
+          style="display:block;cursor:pointer;">
           <div class="feature-icon-wrap">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-4h6v4M9 11h1m4 0h1M9 15h1m4 0h1" />
@@ -2281,11 +2290,17 @@
           </div>
           <h3>Appartements</h3>
           <p>Gérez tous vos appartements et leurs informations en un clic.</p>
-          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          <div
+            style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">
+            En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg></div>
         </a>
 
         <!-- Card 2 — Résidents -->
-        <a href="feature-residents.html" class="feature-card fade-up" id="feature-residents" style="display:block;cursor:pointer;">
+        <a href="feature-residents.html" class="feature-card fade-up" id="feature-residents"
+          style="display:block;cursor:pointer;">
           <div class="feature-icon-wrap">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -2294,11 +2309,17 @@
           </div>
           <h3>Résidents</h3>
           <p>Ajoutez et gérez vos résidents avec leur historique complet.</p>
-          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          <div
+            style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">
+            En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg></div>
         </a>
 
         <!-- Card 3 — Paiements -->
-        <a href="feature-paiements.html" class="feature-card fade-up" id="feature-paiements" style="display:block;cursor:pointer;">
+        <a href="feature-paiements.html" class="feature-card fade-up" id="feature-paiements"
+          style="display:block;cursor:pointer;">
           <div class="feature-icon-wrap">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8" />
@@ -2306,11 +2327,17 @@
           </div>
           <h3>Paiements</h3>
           <p>Suivez les paiements, validez les reçus et générez des rapports PDF.</p>
-          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          <div
+            style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">
+            En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg></div>
         </a>
 
         <!-- Card 4 — Dashboard -->
-        <a href="feature-dashboard.html" class="feature-card fade-up" id="feature-dashboard" style="display:block;cursor:pointer;">
+        <a href="feature-dashboard.html" class="feature-card fade-up" id="feature-dashboard"
+          style="display:block;cursor:pointer;">
           <div class="feature-icon-wrap">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 20V10M12 20V4M6 20v-6" />
@@ -2318,7 +2345,12 @@
           </div>
           <h3>Dashboard</h3>
           <p>Visualisez vos données clés en temps réel sur un tableau de bord.</p>
-          <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          <div
+            style="margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;">
+            En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg></div>
         </a>
 
       </div>
@@ -2354,116 +2386,161 @@
   </section>
 
   <!-- ═══════════════════════ PRICING ════════════════════════ -->
+  ```html
   <section id="pricing">
     <div class="container">
+
       <div class="pricing-header fade-up">
         <span class="section-label">Tarifs</span>
         <h2 class="section-title">Simple et transparent</h2>
-        <p class="section-subtitle">14 jours gratuits, sans carte bancaire.</p>
+        <p class="section-subtitle">
+          Choisissez l'offre adaptée à votre copropriété. 14 jours d'essai gratuits, sans carte bancaire.
+        </p>
       </div>
 
       <div class="pricing-grid">
 
         <!-- Free Trial -->
         <div class="pricing-card fade-up" id="plan-free">
+          <h3 class="plan-title" style="font-size:22px; font-weight:800; color:var(--heading); margin-bottom:12px;">
+            Freemium</h3>
+          <div class="pricing-badge neutral">
+            14 jours gratuits
+          </div>
 
-          <div class="pricing-badge neutral">Aucune carte requise</div>
           <div class="pricing-price">
             <span class="pricing-amount">0 DH</span>
             <span class="pricing-period">/ 14 jours</span>
           </div>
-          <div class="pricing-divider"></div>
-          <div class="pricing-features">
-            <div class="pricing-feature">
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Gestion des appartements
-            </div>
-            <div class="pricing-feature">
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Suivi des charges
-            </div>
-            <div class="pricing-feature">
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Tableau de bord basique
-            </div>
-            <div class="pricing-feature">
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Jusqu'à 10 appartements
-            </div>
-            <div class="pricing-feature off">
-              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-              Comptes résidents
-            </div>
-            <div class="pricing-feature off">
-              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-              Notifications email
-            </div>
-            <div class="pricing-feature off">
-              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-              Export PDF
-            </div>
-          </div>
-          <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-outline-accent" id="btn-plan-free">Démarrer l'essai</a>
-        </div>
 
-        <!-- Starter -->
-        <div class="pricing-card featured fade-up" id="plan-starter">
+          <p class="pricing-description">
+            Découvrez SyndicPro sans engagement.
+          </p>
 
-          <div class="pricing-badge">⭐ Le plus populaire</div>
-          <div class="pricing-price">
-            <span class="pricing-amount">99 DH</span>
-            <span class="pricing-period">/ mois</span>
-          </div>
           <div class="pricing-divider"></div>
+
           <div class="pricing-features">
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              Tout du Free Trial
+              Toutes les fonctionnalités Business
             </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              Jusqu'à 30 appartements
+              Jusqu'à 20 appartements
             </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Gestion des résidents
+            </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Notifications email
             </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Export PDF des reçus
             </div>
-            <div class="pricing-feature off">
-              <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
               </svg>
-              Comptes résidents
+              Sans carte bancaire
             </div>
+
+          </div>
+
+          <a href="https://syndic-app-alpha.vercel.app" class="btn btn-outline-accent" id="btn-plan-free">
+            Essayer gratuitement
+          </a>
+
+        </div>
+
+        <!-- Starter -->
+        <div class="pricing-card featured fade-up" id="plan-starter">
+          <h3 class="plan-title" style="font-size:22px; font-weight:800; color:var(--heading); margin-bottom:12px;">
+            Professionnel</h3>
+          <div class="pricing-badge">
+            ⭐ Le plus populaire
+          </div>
+
+          <div class="pricing-price">
+            <span class="pricing-amount">99 DH</span>
+            <span class="pricing-period">/ mois</span>
+          </div>
+
+          <p class="pricing-description">
+            Idéal pour gérer une seule résidence.
+          </p>
+
+          <div class="pricing-divider"></div>
+
+          <div class="pricing-features">
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Jusqu'à 50 appartements
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Gestion des résidents
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Gestion des charges et paiements
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Notifications email
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Export PDF des reçus
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Gestion des documents
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Support standard
+            </div>
+
             <div class="pricing-feature off">
               <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -2471,66 +2548,108 @@
               </svg>
               Multi-résidences
             </div>
+
           </div>
-          <a href="#signup" class="btn btn-primary" id="btn-plan-starter">Choisir Starter</a>
+
+          <a href="https://syndic-app-alpha.vercel.app" class="btn btn-primary" id="btn-plan-starter">
+            Commencer maintenant
+          </a>
+
         </div>
 
         <!-- Business -->
         <div class="pricing-card fade-up" id="plan-business">
+          <h3 class="plan-title" style="font-size:22px; font-weight:800; color:var(--heading); margin-bottom:12px;">
+            Business</h3>
+          <div class="pricing-badge neutral">
+            Pour les professionnels
+          </div>
 
-          <div class="pricing-badge neutral">Pour les pros</div>
           <div class="pricing-price">
             <span class="pricing-amount">249 DH</span>
             <span class="pricing-period">/ mois</span>
           </div>
+
+          <p class="pricing-description">
+            Conçu pour les syndics gérant plusieurs résidences.
+          </p>
+
           <div class="pricing-divider"></div>
+
           <div class="pricing-features">
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Tout du Starter
             </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              Comptes résidents illimités
+              Appartements illimités
             </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              Multi-résidences
+              Gestion multi-résidences
             </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Statistiques avancées
             </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Rôles et permissions
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Import / Export Excel
+            </div>
+
+            <div class="pricing-feature">
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Personnalisation du logo
+            </div>
+
             <div class="pricing-feature">
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Support prioritaire
             </div>
-            <div class="pricing-feature">
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              API access
-            </div>
+
           </div>
-          <a href="#signup" class="btn btn-outline-accent" id="btn-plan-business">Choisir Business</a>
+
+          <a href="#contact" class="btn btn-outline-accent" id="btn-plan-business">
+            Choisir Business
+          </a>
+
         </div>
 
       </div>
     </div>
   </section>
+  ```
+
 
   <!-- ═══════════════════════ TESTIMONIALS ═══════════════════ -->
-  
+
 
   <!-- ═══════════════════════ GAGNEZ DU TEMPS ═══════════════ -->
   <section id="gagnez-temps">
@@ -2541,7 +2660,8 @@
         <div class="fade-up">
           <span class="section-label">Productivité</span>
           <h2>Gagnez du temps,<br><span>chaque mois</span></h2>
-          <p>Fini les tableurs, les fichiers papier et les appels pour relancer les impayés. SyndicPro automatise votre gestion de A à Z. Concentrez-vous sur l'essentiel — la gestion de votre résidence.</p>
+          <p>Fini les tableurs, les fichiers papier et les appels pour relancer les impayés. SyndicPro automatise votre
+            gestion de A à Z. Concentrez-vous sur l'essentiel — la gestion de votre résidence.</p>
 
           <div class="gagnez-metrics">
             <div class="gagnez-metric">
@@ -2562,26 +2682,30 @@
             </div>
           </div>
 
-          <a href="#signup" class="btn btn-primary" id="btn-commencer-maintenant" style="padding:14px 32px;font-size:16px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+          <a href="https://syndic-app-alpha.vercel.app" class="btn btn-primary" id="btn-commencer-maintenant"
+            style="padding:14px 32px;font-size:16px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              style="margin-right:6px">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+            </svg>
             Commencer maintenant
           </a>
         </div>
 
         <!-- Image -->
         <div class="gagnez-img-wrap fade-up">
-          <div class="browser-bar">
-            <span class="browser-dot red"></span>
-            <span class="browser-dot yellow"></span>
-            <span class="browser-dot green"></span>
-          </div>
           <img src="login.png" alt="Gagnez du temps avec SyndicPro" />
+          <div class="gagnez-img-badge">
+            <div class="gagnez-img-badge-icon">⚡</div>
+            <div class="gagnez-img-badge-text">
+              <strong>Setup en 10 min</strong>
+              <span>Opérationnel immédiatement</span>
+            </div>
+          </div>
+        </div>
 
-           
       </div>
-      
     </div>
-  
   </section>
 
   <!-- ═══════════════════════ SUPPORT ════════════════════════ -->
@@ -2601,8 +2725,12 @@
         <!-- Text -->
         <div class="fade-up">
           <span class="section-label">Support</span>
-          <h2 class="support-text" style="font-size:clamp(26px,3.5vw,40px);font-weight:800;color:var(--heading);line-height:1.2;margin-bottom:14px;">Une équipe à votre écoute,<br>quand vous en avez besoin</h2>
-          <p style="font-size:16px;color:var(--text);line-height:1.8;margin-bottom:28px;max-width:460px;">Notre équipe support est disponible pour vous accompagner à chaque étape — de la configuration initiale jusqu'à votre utilisation quotidienne. Réponse rapide garantie.</p>
+          <h2 class="support-text"
+            style="font-size:clamp(26px,3.5vw,40px);font-weight:800;color:var(--heading);line-height:1.2;margin-bottom:14px;">
+            Une équipe à votre écoute,<br>quand vous en avez besoin</h2>
+          <p style="font-size:16px;color:var(--text);line-height:1.8;margin-bottom:28px;max-width:460px;">Notre équipe
+            support est disponible pour vous accompagner à chaque étape — de la configuration initiale jusqu'à votre
+            utilisation quotidienne. Réponse rapide garantie.</p>
 
           <div class="support-features">
             <div class="support-feature">
@@ -2624,13 +2752,21 @@
           </div>
 
           <div class="support-cta-row">
-            <a href="https://wa.me/212657118224?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20ou%20d%27informations%20concernant%20l%27application%20de%20syndic.%20Merci%20de%20votre%20assistance." target="_blank" rel="noopener" class="btn-whatsapp" id="btn-whatsapp-support">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <a href="https://wa.me/212657118224?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20ou%20d%27informations%20concernant%20l%27application%20de%20syndic.%20Merci%20de%20votre%20assistance."
+              target="_blank" rel="noopener" class="btn-whatsapp" id="btn-whatsapp-support">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
               WhatsApp
             </a>
             <a href="tel:+212657118224" class="btn-phone" id="btn-phone-support">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-               Appelez-nous
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              Appelez-nous
             </a>
           </div>
         </div>
@@ -2759,26 +2895,37 @@
     <div class="container">
       <div class="cta-inner fade-up" id="cta-block">
         <div class="cta-label">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
           Offre limitée
         </div>
         <h2 class="section-title">Prêt à simplifier votre <span>gestion</span> ?</h2>
         <p class="section-subtitle">14 jours gratuits, sans carte bancaire. Annulez à tout moment.</p>
-        <a href="https://syndic-app-alpha.vercel.app/register" class="btn btn-primary" id="btn-final-cta">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+        <a href="https://syndic-app-alpha.vercel.app" class="btn btn-primary" id="btn-final-cta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            style="margin-right:6px">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+          </svg>
           Créer mon compte gratuit
         </a>
         <div class="cta-trust">
           <div class="cta-trust-item">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Sans carte bancaire
           </div>
           <div class="cta-trust-item">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Annulation gratuite
           </div>
           <div class="cta-trust-item">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Support inclus
           </div>
         </div>
